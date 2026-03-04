@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import logo from '$lib/assets/logo.webp';
+	import { contactModalOpen } from '$lib/stores/contactModal';
 
 	let mobileMenuOpen = $state(false);
 	let scrollY = $state(0);
@@ -21,6 +22,11 @@
 	}
 
 	function closeMobileMenu() {
+		mobileMenuOpen = false;
+	}
+
+	function openContactModal() {
+		contactModalOpen.set(true);
 		mobileMenuOpen = false;
 	}
 </script>
@@ -45,7 +51,9 @@
 
 		<div class="headerActions">
 			<a href="tel:4803311373" class="phoneLink">(480) 331-1373</a>
-			<a href="/contact" class="btnInspection">Free Inspection</a>
+			<button type="button" class="btnInspection" onclick={openContactModal}>
+				Free Inspection
+			</button>
 		</div>
 
 		<button
@@ -78,7 +86,9 @@
 				{/each}
 				<div class="mobileActions">
 					<a href="tel:4803311373" class="mobilePhone">(480) 331-1373</a>
-					<a href="/contact" onclick={closeMobileMenu} class="mobileCta">Free Inspection</a>
+					<button type="button" onclick={openContactModal} class="mobileCta">
+						Free Inspection
+					</button>
 				</div>
 			</nav>
 		</div>

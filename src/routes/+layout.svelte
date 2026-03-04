@@ -4,6 +4,7 @@
 	import favicon from '$lib/assets/favicon.webp';
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import ContactModal from '$lib/components/ContactModal.svelte';
 
 	let { children } = $props();
 </script>
@@ -24,6 +25,7 @@
 		{@render children()}
 	</main>
 	<Footer />
+	<ContactModal />
 </div>
 
 <style>

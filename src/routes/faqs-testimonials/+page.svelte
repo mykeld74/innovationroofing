@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { slide } from 'svelte/transition';
+
 	let openFaq = $state<number | null>(null);
 
 	function toggleFaq(index: number) {
@@ -103,7 +105,7 @@
 						</svg>
 					</button>
 					{#if openFaq === i}
-						<div class="faqAnswer">
+						<div class="faqAnswer" transition:slide>
 							<p>{faq.answer}</p>
 						</div>
 					{/if}

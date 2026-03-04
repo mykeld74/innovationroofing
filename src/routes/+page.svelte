@@ -10,6 +10,11 @@
 		{ name: 'Flat Roof Recoating', icon: 'paint' }
 	];
 	import { residentialRoofing, commercialRoofing, masterElite } from '$lib';
+	import { contactModalOpen } from '$lib/stores/contactModal';
+
+	function openContactModal() {
+		contactModalOpen.set(true);
+	}
 </script>
 
 <svelte:head>
@@ -31,7 +36,9 @@
 			craftsmanship backed by experience you can trust.
 		</p>
 		<div class="heroActions">
-			<a href="/contact" class="btnPrimary">Get a Free Inspection</a>
+			<button type="button" class="btnPrimary" onclick={openContactModal}>
+				Get a Free Inspection
+			</button>
 			<a href="tel:4803311373" class="btnOutline">Call (480) 331-1373</a>
 		</div>
 	</div>
@@ -57,7 +64,7 @@
 						aesthetic appeal of your home. From roof installations to repairs, we prioritize
 						customer satisfaction in every project we undertake.
 					</p>
-					<a href="/contact" class="cardLink">
+					<button type="button" class="cardLink" onclick={openContactModal}>
 						Request a Quote
 						<svg
 							class="cardLinkIcon"
@@ -68,7 +75,7 @@
 						>
 							<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
 						</svg>
-					</a>
+					</button>
 				</div>
 			</div>
 
@@ -83,7 +90,7 @@
 						expert team is dedicated to delivering high-quality workmanship and exceptional service,
 						ensuring that your commercial roofing needs are met with precision and care.
 					</p>
-					<a href="/contact" class="cardLink">
+					<button type="button" class="cardLink" onclick={openContactModal}>
 						Request a Quote
 						<svg
 							class="cardLinkIcon"
@@ -94,7 +101,7 @@
 						>
 							<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
 						</svg>
-					</a>
+					</button>
 				</div>
 			</div>
 		</div>
