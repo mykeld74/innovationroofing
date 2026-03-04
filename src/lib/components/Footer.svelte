@@ -108,41 +108,6 @@
 		grid-area: logo;
 	}
 
-	.footerLogoIcon {
-		width: 40px;
-		height: 40px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: rgba(255, 255, 255, 0.1);
-		color: var(--colorWhite);
-		font-size: 14px;
-		font-weight: 700;
-		border-radius: var(--radius);
-	}
-
-	.footerLogoName {
-		display: block;
-		font-size: 18px;
-		font-weight: 700;
-		color: var(--colorWhite);
-		line-height: 1.2;
-	}
-
-	.footerLogoTag {
-		display: block;
-		font-size: 11px;
-		color: #718096;
-		letter-spacing: 0.5px;
-	}
-
-	.footerDesc {
-		font-size: 14px;
-		line-height: 1.7;
-		color: #718096;
-		margin-top: 16px;
-	}
-
 	.footerHeading {
 		font-size: 13px;
 		font-weight: 600;
@@ -150,13 +115,6 @@
 		letter-spacing: 1px;
 		color: var(--colorWhite);
 		margin-bottom: 16px;
-	}
-
-	.footerList {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
 	}
 
 	.footerLink {

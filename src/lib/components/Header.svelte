@@ -3,9 +3,12 @@
 	import logo from '$lib/assets/logo.webp';
 
 	let mobileMenuOpen = $state(false);
+	let scrollY = $state(0);
+	const needsFallback =
+		typeof CSS !== 'undefined' ? !CSS.supports('animation-timeline', 'scroll()') : true;
+	let isHeaderCompact = $derived(scrollY > 30);
 
 	const navLinks = [
-		{ href: '/', label: 'Home' },
 		{ href: '/about-us', label: 'About Us' },
 		{ href: '/our-projects', label: 'Our Projects' },
 		{ href: '/faqs-testimonials', label: 'FAQs & Testimonials' },
@@ -22,7 +25,9 @@
 	}
 </script>
 
-<header class="header">
+<svelte:window onscroll={needsFallback ? () => (scrollY = window.scrollY) : undefined} />
+
+<header class="header" class:headerCompact={needsFallback && isHeaderCompact}>
 	<div class="headerInner">
 		<a href="/" class="logo" onclick={closeMobileMenu}>
 			<div class="logoIcon">
@@ -97,6 +102,7 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 16px 24px;
+		transition: padding var(--transition);
 	}
 
 	.logo {
@@ -106,11 +112,56 @@
 	}
 
 	.logoIcon {
-		width: 150px;
+		width: 140px;
 		height: auto;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		transition: width var(--transition);
+	}
+
+	/* JS fallback for browsers without scroll-driven animations (Firefox) */
+	.headerCompact .headerInner {
+		padding: 4px 24px;
+	}
+
+	.headerCompact .logoIcon {
+		width: 80px;
+	}
+
+	/* Scroll-driven animations for supporting browsers */
+	@supports (animation-timeline: scroll()) {
+		@keyframes shrinkHeader {
+			from {
+				padding-top: 16px;
+				padding-bottom: 16px;
+			}
+			to {
+				padding-top: 4px;
+				padding-bottom: 4px;
+			}
+		}
+
+		@keyframes shrinkLogo {
+			from {
+				width: 140px;
+			}
+			to {
+				width: 80px;
+			}
+		}
+
+		.headerInner {
+			animation: shrinkHeader linear both;
+			animation-timeline: scroll();
+			animation-range: 0px 100px;
+		}
+
+		.logoIcon {
+			animation: shrinkLogo linear both;
+			animation-timeline: scroll();
+			animation-range: 0px 100px;
+		}
 	}
 
 	.desktopNav {

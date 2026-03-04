@@ -28,6 +28,7 @@
 	--shadowMd: 0 4px 12px rgba(0, 0, 0, 0.08);
 	--shadowLg: 0 8px 24px rgba(0, 0, 0, 0.12);
 	--transition: 200ms ease;
+	--logoWidth: 150px;
 }
 
 *,
@@ -77,16 +78,4 @@ select {
 	max-width: var(--maxWidth);
 	margin: 0 auto;
 	padding: 0 24px;
-}
-
-.srOnly {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border-width: 0;
 }

@@ -547,10 +547,6 @@
 		min-width: 190px;
 	}
 
-	.masterEliteBtnSecondary {
-		min-width: 210px;
-	}
-
 	.cta {
 		padding: 64px 0;
 		background: var(--colorPrimary);
