@@ -42,19 +42,19 @@
 
 	const testimonials = [
 		{
-			name: 'Sarah Johnson',
-			location: 'Scottsdale, AZ',
-			text: 'Innovation Roofing did an outstanding job on our tile roof replacement. Their team was professional, on time, and left the job site cleaner than they found it. Highly recommend!'
+			name: 'Elizabeth Cavazos',
+			location: '',
+			text: 'I cannot express the Relief and Gratitude I have experienced with Innovation Roofing & Shades. Petra and her Team are Top Notch. From Start to Finish every detail was handled with Professionalism and Patience. The pictures of before and after speak for themselves. The quality of work is way above expectations. I am also having more work done through Innovation because they are a Company that delivers exactly what they. First three photos are Before, next three are After... Quality Workmanship is what Innovation offers and delivers. Thank You Petra Thank All involved.'
 		},
 		{
-			name: 'Mike Rodriguez',
-			location: 'Tucson, AZ',
-			text: 'After a monsoon damaged our roof, Innovation Roofing handled our insurance claim seamlessly. They made a stressful situation easy to manage. The repairs look fantastic.'
+			name: 'Leslie Hobbs',
+			location: '',
+			text: 'Leo from Innovation Roofing was amazing!!! He did a fantastic job! They were so quick to respond and come to give us an estimate. The workmanship was top notch and was done quickly and left our house clean and looking beautiful! Thank you Leo and team for all your help! 100% recommend to anyone!!!'
 		},
 		{
-			name: 'Jennifer Walsh',
-			location: 'Phoenix, AZ',
-			text: "We hired them for a complete re-roof of our commercial building. The quality of work was top-notch and they completed it ahead of schedule. We couldn't be happier with the results."
+			name: 'Neyva Rodriguez',
+			location: '',
+			text: 'We had a great experience with Petra from Innovation Roofing and Shades. From start to finish, the owner was incredibly responsive and always available to answer our questions. Her customer service was great — she took the time to explain every detail thoroughly, especially for my parents who only speak Spanish. They truly appreciated her patience and clear communication. The whole process was smooth and professional, and we felt confident and informed every step of the way. We highly recommend this company to anyone looking for reliable and attentive roofing services!'
 		}
 	];
 
@@ -79,8 +79,8 @@
 		<p class="heroLabel">Questions & Reviews</p>
 		<h1 class="heroTitle">FAQs & Testimonials</h1>
 		<p class="heroDesc">
-			Get answers to common questions and hear from customers who trust Innovation Roofing for
-			their homes and businesses.
+			Get answers to common questions and hear from customers who trust Innovation Roofing for their
+			homes and businesses.
 		</p>
 	</div>
 </section>
@@ -124,7 +124,9 @@
 					<div class="stars">
 						{#each { length: 5 } as _, starIndex (starIndex)}
 							<svg class="starIcon" fill="currentColor" viewBox="0 0 20 20">
-								<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+								<path
+									d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+								/>
 							</svg>
 						{/each}
 					</div>
