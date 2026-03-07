@@ -11,6 +11,9 @@ importers:
       imask:
         specifier: ^7.6.1
         version: 7.6.1
+      nodemailer:
+        specifier: ^8.0.1
+        version: 8.0.1
     devDependencies:
       '@eslint/compat':
         specifier: ^2.0.2
@@ -42,9 +45,6 @@ importers:
       globals:
         specifier: ^17.3.0
         version: 17.4.0
-      nodemailer:
-        specifier: ^8.0.1
-        version: 8.0.1
       prettier:
         specifier: ^3.8.1
         version: 3.8.1

@@ -46,7 +46,7 @@
 			<p class="modalSubtitle">
 				Share a few details and our team will reach out to schedule your appointment.
 			</p>
-			<ContactForm />
+			<ContactForm isInModal={true} />
 		</div>
 	</div>
 {/if}

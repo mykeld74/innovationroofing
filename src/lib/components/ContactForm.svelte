@@ -1,5 +1,16 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { enhance, applyAction } from '$app/forms';
+	import { contactModalOpen } from '$lib/stores/contactModal';
+	import IMask from 'imask';
+
+	const maskConfig = { mask: '(000) 000-0000' };
+
+	interface Props {
+		isInModal?: boolean;
+	}
+
+	let { isInModal = false }: Props = $props();
 
 	let firstName = $state('');
 	let lastName = $state('');
@@ -7,7 +18,11 @@
 	let phone = $state('');
 	let subject = $state('');
 	let message = $state('');
-	let submitted = $state(false);
+
+	let submitting = $state(false);
+	let showSuccess = $state(false);
+	let serverError = $state('');
+	let successTimer: ReturnType<typeof setTimeout> | null = null;
 
 	let formIsValid = $state(false);
 	let errors = $state({
@@ -19,14 +34,40 @@
 		message: ''
 	});
 
+	function clearForm() {
+		firstName = '';
+		lastName = '';
+		email = '';
+		phone = '';
+		subject = '';
+		message = '';
+		errors = { firstName: '', lastName: '', email: '', phone: '', subject: '', message: '' };
+		serverError = '';
+	}
+
+	function onSuccess() {
+		showSuccess = true;
+		if (successTimer) clearTimeout(successTimer);
+		successTimer = setTimeout(() => {
+			if (isInModal) {
+				contactModalOpen.set(false);
+				setTimeout(() => {
+					showSuccess = false;
+					clearForm();
+				}, 200);
+			} else {
+				showSuccess = false;
+				clearForm();
+			}
+		}, 3500);
+	}
+
 	function handleInput(field: keyof typeof errors) {
 		errors[field] = '';
 		formIsValid = true;
 	}
 
 	function handleSubmit(e: SubmitEvent) {
-		e.preventDefault();
-
 		const emailTest = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,6}$/;
 
 		formIsValid = true;
@@ -74,17 +115,37 @@
 		}
 
 		if (!formIsValid) {
-			submitted = false;
+			e.preventDefault();
 			return;
 		}
-
-		submitted = true;
 	}
 </script>
 
 <div class="contactFormWrap">
-	<form onsubmit={handleSubmit} class="contactForm" novalidate>
-		{#if submitted}
+	<form
+		method="POST"
+		action="/contact"
+		class="contactForm"
+		novalidate
+		onsubmit={handleSubmit}
+		use:enhance={() => {
+			submitting = true;
+			serverError = '';
+			return async ({ result }) => {
+				submitting = false;
+				if (result.type === 'success') {
+					onSuccess();
+				} else if (result.type === 'failure') {
+					serverError =
+						(result.data as { error?: string })?.error ??
+						'Something went wrong. Please try again.';
+				} else {
+					await applyAction(result);
+				}
+			};
+		}}
+	>
+		{#if showSuccess}
 			<div class="successMessage">
 				<svg
 					class="successIcon"
@@ -100,9 +161,7 @@
 					/>
 				</svg>
 				<h3 class="successTitle">Message Sent!</h3>
-				<p class="successText">
-					We've received your message and will get back to you shortly.
-				</p>
+				<p class="successText">We've received your message and will get back to you shortly.</p>
 			</div>
 		{:else}
 			<div class="formRow">
@@ -110,6 +169,7 @@
 					<label for="firstName" class="formLabel">First Name</label>
 					<input
 						id="firstName"
+						name="firstName"
 						type="text"
 						bind:value={firstName}
 						required
@@ -131,6 +191,7 @@
 					<label for="lastName" class="formLabel">Last Name</label>
 					<input
 						id="lastName"
+						name="lastName"
 						type="text"
 						bind:value={lastName}
 						required
@@ -153,6 +214,7 @@
 				<label for="email" class="formLabel">Email Address</label>
 				<input
 					id="email"
+					name="email"
 					type="email"
 					bind:value={email}
 					required
@@ -174,8 +236,10 @@
 				<label for="phone" class="formLabel">Phone Number</label>
 				<input
 					id="phone"
+					name="phone"
 					type="tel"
 					bind:value={phone}
+					use:IMask={maskConfig}
 					required
 					class="formInput"
 					placeholder="Your phone number"
@@ -195,6 +259,7 @@
 				<label for="subject" class="formLabel">Subject</label>
 				<input
 					id="subject"
+					name="subject"
 					type="text"
 					bind:value={subject}
 					required
@@ -216,6 +281,7 @@
 				<label for="message" class="formLabel">Message</label>
 				<textarea
 					id="message"
+					name="message"
 					bind:value={message}
 					required
 					rows="5"
@@ -233,7 +299,14 @@
 					{/if}
 				</div>
 			</div>
-			<button type="submit" class="formSubmit">Send Message</button>
+			<button type="submit" class="formSubmit" disabled={submitting} aria-busy={submitting}>
+				{#if submitting}
+					<span class="formSubmitSpinner" aria-hidden="true"></span>
+					<span class="formSubmitText">Sending...</span>
+				{:else}
+					Send Message
+				{/if}
+			</button>
 		{/if}
 	</form>
 </div>
@@ -354,10 +427,38 @@
 		font-weight: 600;
 		border-radius: var(--radius);
 		transition: background var(--transition);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
 	}
 
-	.formSubmit:hover {
+	.formSubmit:hover:not(:disabled) {
 		background: var(--colorAccentDark);
+	}
+
+	.formSubmit:disabled {
+		opacity: 0.85;
+		cursor: not-allowed;
+	}
+
+	.formSubmitSpinner {
+		width: 20px;
+		height: 20px;
+		border: 2px solid rgba(255, 255, 255, 0.35);
+		border-top-color: var(--colorWhite);
+		border-radius: 50%;
+		animation: formSubmitSpin 0.7s linear infinite;
+	}
+
+	.formSubmitText {
+		visibility: visible;
+	}
+
+	@keyframes formSubmitSpin {
+		to {
+			transform: rotate(360deg);
+		}
 	}
 
 	@media (min-width: 640px) {
@@ -366,4 +467,3 @@
 		}
 	}
 </style>
-
