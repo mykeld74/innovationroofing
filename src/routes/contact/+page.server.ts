@@ -7,7 +7,7 @@ import {
 	type ContactFormData
 } from '$lib/email/contactFormEmail';
 
-const TO_EMAIL = 'mike@bigbearded.dev';
+const TO_EMAIL = 'info@innovationroofingllc.com';
 
 function getTransporter() {
 	const user = env.GOOGLE_EMAIL;
