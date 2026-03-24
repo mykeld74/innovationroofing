@@ -52,7 +52,7 @@
 		<div class="headerActions">
 			<a href="tel:4803311373" class="phoneLink">(480) 331-1373</a>
 			<button type="button" class="btnInspection" onclick={openContactModal}>
-				Free Inspection
+				What'll this cost me?
 			</button>
 		</div>
 
@@ -87,7 +87,7 @@
 				<div class="mobileActions">
 					<a href="tel:4803311373" class="mobilePhone">(480) 331-1373</a>
 					<button type="button" onclick={openContactModal} class="mobileCta">
-						Free Inspection
+						What'll this cost me?
 					</button>
 				</div>
 			</nav>

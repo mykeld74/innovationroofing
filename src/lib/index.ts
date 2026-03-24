@@ -12,6 +12,8 @@ import anthonyHicks from '$lib/assets/anthonyHicks.webp';
 import laikaWesterlund from '$lib/assets/laikaWesterlund.webp';
 import ianSteffen from '$lib/assets/ianSteffen.webp';
 import joshNehls from '$lib/assets/joshNehls.webp';
+import roofRefresh from '$lib/assets/roofRefresh.webp';
+import oneNinetyNineRepair from '$lib/assets/199Repair.png';
 
 export {
 	residentialRoofing,
@@ -27,5 +29,7 @@ export {
 	anthonyHicks,
 	laikaWesterlund,
 	ianSteffen,
-	joshNehls
+	joshNehls,
+	roofRefresh,
+	oneNinetyNineRepair
 };

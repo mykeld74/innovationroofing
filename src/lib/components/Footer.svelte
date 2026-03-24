@@ -8,6 +8,7 @@
 			<div class="footerBrand">
 				<div class="footerLogo">
 					<img src={innovationLogo} alt="Innovation Roofing & Shades LLC" />
+					<p>RROC - ROC350607</p>
 				</div>
 			</div>
 
@@ -94,8 +95,8 @@
 	.footerGrid {
 		display: grid;
 		gap: 48px;
-		grid-template-columns: 1fr 1fr;
-		grid-template-areas: 'logo contact';
+		grid-template-columns: auto 1fr auto;
+		grid-template-areas: 'logo spacer contact';
 
 		align-items: center;
 	}
@@ -106,6 +107,12 @@
 		gap: 12px;
 		margin-bottom: 16px;
 		grid-area: logo;
+		flex-direction: column;
+		align-items: flex-start;
+		p {
+			width: 100%;
+			text-align: center;
+		}
 	}
 
 	.footerHeading {
@@ -129,6 +136,7 @@
 		grid-area: contact;
 		justify-self: end;
 		align-self: start;
+		text-align: center;
 	}
 
 	.footerContactList {
