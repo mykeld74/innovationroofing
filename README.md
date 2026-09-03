@@ -1,42 +1,61 @@
-# sv
+# Innovation Roofing & Shades LLC
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Marketing website for **Innovation Roofing & Shades LLC**, a residential and commercial roofing company serving the greater Tucson and Phoenix areas.
 
-## Creating a project
+## What's included
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Home page with services overview and CTAs
+- About Us (company values and team)
+- Our Projects
+- FAQs & Testimonials
+- Contact page and modal contact form
+- Contact submissions emailed via Nodemailer (Gmail SMTP)
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Stack
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-pnpm dlx sv@0.12.4 create --template minimal --types ts --add prettier eslint sveltekit-adapter="adapter:netlify" devtools-json mcp="ide:claude-code,cursor+setup:remote" --install pnpm innovationroofingllc
-```
+- [SvelteKit](https://svelte.dev/docs/kit) + TypeScript
+- [Vite](https://vitejs.dev/)
+- [@sveltejs/adapter-netlify](https://svelte.dev/docs/kit/adapter-netlify) for deployment
+- [Nodemailer](https://nodemailer.com/) for contact form email
+- pnpm, Prettier, ESLint
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm install
+pnpm dev
 ```
 
-## Building
-
-To create a production version of your app:
+Open the app with:
 
 ```sh
-npm run build
+pnpm dev -- --open
 ```
 
-You can preview the production build with `npm run preview`.
+## Environment variables
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Create a `.env` file in the project root for the contact form:
+
+```env
+GOOGLE_EMAIL=
+GOOGLE_EMAIL_PASSWORD=
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+```
+
+`MAIL_HOST` and `MAIL_PORT` are optional (defaults shown above). Submissions are sent to `info@innovationroofingllc.com`.
+
+## Scripts
+
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `pnpm dev`     | Start the dev server     |
+| `pnpm build`   | Production build         |
+| `pnpm preview` | Preview the production build |
+| `pnpm check`   | Type-check with svelte-check |
+| `pnpm lint`    | Run Prettier + ESLint    |
+| `pnpm format`  | Format with Prettier     |
+
+## Deploying
+
+The project is configured for **Netlify** via `@sveltejs/adapter-netlify`. Set the same environment variables in the Netlify project settings so the contact form can send mail in production.
